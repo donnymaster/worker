@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Program</title>
+</head>
+
+<body>
+    <center>
+        <h2 class="mt-2 mb-4">Таблиця</h2>
+    </center>
+    <div class="container mb-2">
+        <button id="recalculate" type="button" class="btn btn-primary">Перерахувати</button>
+        <button id="load_chart" type="button" class="btn btn-primary">Відобразити на графіку</button>
+        <button id="save_file" type="button" class="btn btn-success">Зберегти в файл</button>
+        <button id="add_experiment" type="button" class="btn btn-info">Додати експеримент</button>
+        <button id="clear_table" type="button" class="btn btn-info">Очистити таблицю</button>
+        <button id="clear_chart" type="button" class="btn btn-info">Очистити графік</button>
+        <input type="file" hidden id="loaded_table">
+    </div>
+    <div class="container">
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupFile01">Завантажити з файлу</label>
+            <input accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" id="load_file" type="file"
+                class="form-control" />
+        </div>
+    </div>
+    <div class="container mt-3 table-data">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">№ эксперимента</th>
+                    <th scope="col">F<sub>мс</sub></th>
+                    <th scope="col">F<sub>тер</sub></th>
+                    <th scope="col"><b>F(t)</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-expriment="1">
+                    <td>1</td>
+                    <td><input type="number" class="form-control f_mc" /></td>
+                    <td><input type="number" class="form-control f_ter" /></td>
+                    <td><input type="number" class="form-control f_t" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container mt-4 mb-4">
+        <canvas id="myChart" width="200"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+    <script src="xlsx.full.min.js"></script>
+    <script src="FileSaver.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+        const val = new Worker(
+            '.table-data',
+            '#save_file',
+            '#load_file',
+            '#load_chart',
+            '#myChart',
+            '#add_experiment',
+            '#clear_table',
+            '#clear_chart',
+            '#recalculate'
+        );
+    </script>
+
+</body>
+
+</html>
